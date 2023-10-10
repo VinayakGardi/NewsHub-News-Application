@@ -1,0 +1,12 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.NewsHub_NewsApplication" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="fontFamily">@font/notosans_regular</item>
+    </style>
+
+    <style name="Theme.NewsHub_NewsApplication" parent="Base.Theme.NewsHub_NewsApplication" />
+
+    <style name="action_bar_style">
+        <item name="fontFamily">@font/vesper_libre_regular</item>
+    </style>
+</resources>
