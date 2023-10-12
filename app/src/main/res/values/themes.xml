@@ -7,6 +7,18 @@
     <style name="Theme.NewsHub_NewsApplication" parent="Base.Theme.NewsHub_NewsApplication" />
 
     <style name="action_bar_style">
-        <item name="fontFamily">@font/vesper_libre_regular</item>
+        <item name="fontFamily">@font/vesper_libre_bold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="new_list_title">
+        <item name="fontFamily">@font/notosans_bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="news_list_description">
+        <item name="fontFamily">@font/notosans_regular</item>
+        <item name="android:textColor">@color/black</item>
+
     </style>
 </resources>
