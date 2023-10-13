@@ -6,7 +6,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="350dp"
         android:layout_margin="10dp"
         android:elevation="2dp"
         app:cardCornerRadius="20dp"
@@ -47,7 +47,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/news_image" />
 
             <TextView
-                android:id="@+id/news_description"
+                android:id="@+id/news_excerpt"
                 style="@style/news_list_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
