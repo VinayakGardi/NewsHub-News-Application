@@ -1,6 +1,7 @@
 package com.vinayakgardi.newshub_newsapplication.Adapter
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +14,8 @@ class ArticleAdapter(var list : ArrayList<ArticleModel>, val context: Context ):
     class ViewHolder (var binding: ItemCardNewsBinding ) : RecyclerView.ViewHolder(binding.root){
       fun bind(model : ArticleModel, context: Context){
           binding.apply {
-              newsTitle.text = model.title
-              newsExcerpt.text = model.excerpt
+              newsTitle.text = Html.fromHtml(model.title)
+              newsExcerpt.text = Html.fromHtml(model.excerpt)
               imageWithGlide(model.image,newsImage,context)
           }
       }

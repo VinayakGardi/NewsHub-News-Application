@@ -3,6 +3,7 @@ package com.vinayakgardi.newshub_newsapplication.Activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.vinayakgardi.newshub_newsapplication.Adapter.ArticleAdapter
 import com.vinayakgardi.newshub_newsapplication.Model.ArticleModel
 import com.vinayakgardi.newshub_newsapplication.Repository.APIResponses
@@ -65,6 +66,13 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         binding.apply {
             recyclerList.adapter = adapter
+            recyclerList.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    if(!recyclerView.canScrollVertically(1))
+                        viewModel.loadArticles()
+                }
+            })
         }
     }
 }
