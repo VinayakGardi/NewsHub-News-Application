@@ -2,6 +2,7 @@ package com.vinayakgardi.newshub_newsapplication.Activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.vinayakgardi.newshub_newsapplication.Adapter.ArticleAdapter
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     val list: ArrayList<ArticleModel> = ArrayList()
     val adapter = ArticleAdapter(list, this)
+    private val refreshLiveData = MutableLiveData<Boolean>()
 
     lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,10 +31,21 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             setupRecyclerView()
             loadArticlesFromAPI()
+            loadRefreshArticles()
 
 
         }
 
+
+    }
+    private fun loadRefreshArticles(){
+        refreshLiveData.observe(this@MainActivity){
+            binding.swiperefresh.isRefreshing = it
+        }
+        binding.swiperefresh.setOnRefreshListener {
+            viewModel.currentPage = 0
+            viewModel.loadArticles()
+        }
 
     }
 
@@ -47,10 +60,15 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 is APIResponses.Error -> {
                     showMessage(this@MainActivity, "Error ${it.errorMessage}")
+                    refreshLiveData.value = false
                 }
 
-                is APIResponses.Loading -> showMessage(this@MainActivity, "Loading")
+                is APIResponses.Loading -> {
+                    showMessage(this@MainActivity, "Loading")
+                    refreshLiveData.value = true
+                }
                 is APIResponses.Success -> {
+                    refreshLiveData.value = false
                     if (it.data!!.isNotEmpty()) {
                         it.data?.forEach { model ->
                             list.add(model)
