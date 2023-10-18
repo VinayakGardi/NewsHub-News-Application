@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="150dp">
 
@@ -36,16 +37,14 @@
             <TextView
                 android:id="@+id/news_list_title"
                 style="@style/new_list_title"
-                android:layout_width="250dp"
-                android:layout_height="68dp"
-                android:layout_marginStart="10dp"
+                android:layout_width="197dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:maxLines="2"
                 android:text="Title"
-                android:textSize="@dimen/_20sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.049"
-                app:layout_constraintStart_toEndOf="@+id/news_list_image"
+                android:textSize="@dimen/_15sdp"
+                app:layout_constraintStart_toEndOf="@id/news_list_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -53,25 +52,27 @@
                 style="@style/news_list_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="Author Name"
                 android:textSize="@dimen/_10sdp"
-                app:layout_constraintStart_toEndOf="@+id/news_list_image"
-                app:layout_constraintTop_toBottomOf="@+id/news_list_title" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/news_list_image" />
 
             <TextView
                 android:id="@+id/news_list_read_time"
                 style="@style/news_list_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:text=". 20 mins"
                 android:textSize="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.084"
-                app:layout_constraintStart_toEndOf="@+id/news_list_author_name"
-                app:layout_constraintTop_toBottomOf="@+id/news_list_title" />
+                app:layout_constraintStart_toEndOf="@+id/news_list_author_name" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

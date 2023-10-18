@@ -6,7 +6,6 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.vinayakgardi.newshub_newsapplication.Activities.ArticleActivity
 import com.vinayakgardi.newshub_newsapplication.Model.ArticleModel
 import com.vinayakgardi.newshub_newsapplication.Utilites.imageWithGlide
@@ -38,12 +37,12 @@ class ArticleAdapter(var list : ArrayList<ArticleModel>, val context: Context ):
     }
 
     class listViewHolder(var binding: ItemListNewsBinding) : RecyclerView.ViewHolder(binding.root){
-     fun bind(model : ArticleModel , context: Context){
+     fun bind( context: Context,model : ArticleModel ){
          binding.apply {
              imageWithGlide(model.image,newsListImage,context)
              newsListAuthorName.text = Html.fromHtml(model.authorName)
              newsListTitle.text = Html.fromHtml(model.title)
-             newsListReadTime.text = model.readingTime
+             newsListReadTime.text = ". ${model.readingTime} mins"
 
              itemNewsList.setOnClickListener {
                  val intent = Intent().apply {
@@ -57,11 +56,18 @@ class ArticleAdapter(var list : ArrayList<ArticleModel>, val context: Context ):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("Not yet implemented")
+       if(viewType==1){
+           return cardviewHolder(ItemCardNewsBinding.inflate(LayoutInflater.from(context),parent,false))
+       }else
+        return listViewHolder(ItemListNewsBinding.inflate(LayoutInflater.from(context),parent,false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val model  = list[position]
+        if(getItemViewType(position) == LAYOUT_CARD){
+            (holder as cardviewHolder).bind(model,context)
+        }
+        (holder as listViewHolder).bind(context,model)
     }
 
 

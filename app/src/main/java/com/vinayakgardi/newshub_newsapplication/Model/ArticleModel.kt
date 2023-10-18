@@ -1,6 +1,7 @@
 package com.vinayakgardi.newshub_newsapplication.Model
 
 import com.vinayakgardi.newshub_newsapplication.Adapter.LAYOUT_CARD
+import com.vinayakgardi.newshub_newsapplication.Adapter.LAYOUT_LIST
 import java.io.Serializable
 
 data class ArticleModel(
@@ -16,5 +17,5 @@ data class ArticleModel(
     val image : String,
     val category: Int,
     val authorUrl : String,
-    val LAYOUT_TYPE : Int = LAYOUT_CARD
+    val LAYOUT_TYPE : Int = LAYOUT_LIST
 ) : Serializable
