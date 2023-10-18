@@ -6,14 +6,18 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.vinayakgardi.newshub_newsapplication.Activities.ArticleActivity
 import com.vinayakgardi.newshub_newsapplication.Model.ArticleModel
 import com.vinayakgardi.newshub_newsapplication.Utilites.imageWithGlide
 import com.vinayakgardi.newshub_newsapplication.databinding.ItemCardNewsBinding
+import com.vinayakgardi.newshub_newsapplication.databinding.ItemListNewsBinding
 
-class ArticleAdapter(var list : ArrayList<ArticleModel>, val context: Context ): RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+const val LAYOUT_CARD = 1
+const  val LAYOUT_LIST = 2
+class ArticleAdapter(var list : ArrayList<ArticleModel>, val context: Context ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    class ViewHolder (var binding: ItemCardNewsBinding ) : RecyclerView.ViewHolder(binding.root){
+    class cardviewHolder (var binding: ItemCardNewsBinding ) : RecyclerView.ViewHolder(binding.root){
       fun bind(model : ArticleModel, context: Context){
           binding.apply {
               newsTitle.text = Html.fromHtml(model.title)
@@ -33,13 +37,41 @@ class ArticleAdapter(var list : ArrayList<ArticleModel>, val context: Context ):
       }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-       return ViewHolder(ItemCardNewsBinding.inflate(LayoutInflater.from(context),parent,false))
+    class listViewHolder(var binding: ItemListNewsBinding) : RecyclerView.ViewHolder(binding.root){
+     fun bind(model : ArticleModel , context: Context){
+         binding.apply {
+             imageWithGlide(model.image,newsListImage,context)
+             newsListAuthorName.text = Html.fromHtml(model.authorName)
+             newsListTitle.text = Html.fromHtml(model.title)
+             newsListReadTime.text = model.readingTime
+
+             itemNewsList.setOnClickListener {
+                 val intent = Intent().apply {
+                     putExtra("model",model)
+                     setClass(context,ArticleActivity::class.java)
+                 }
+                 context.startActivity(intent)
+             }
+         }
+     }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-       val model = list[position]
-        holder.bind(model,context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        TODO("Not yet implemented")
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        TODO("Not yet implemented")
+    }
+
+
+    override fun getItemViewType(position: Int): Int {
+         return if(list[position].LAYOUT_TYPE == LAYOUT_CARD){
+             LAYOUT_CARD
+         }
+        else{
+            LAYOUT_LIST
+         }
     }
 
     override fun getItemCount(): Int  = list.size

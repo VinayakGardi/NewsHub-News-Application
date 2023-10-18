@@ -32,14 +32,12 @@ class MainActivity : AppCompatActivity() {
             setupRecyclerView()
             loadArticlesFromAPI()
             loadRefreshArticles()
-
-
         }
 
-
     }
-    private fun loadRefreshArticles(){
-        refreshLiveData.observe(this@MainActivity){
+
+    private fun loadRefreshArticles() {
+        refreshLiveData.observe(this@MainActivity) {
             binding.swiperefresh.isRefreshing = it
         }
         binding.swiperefresh.setOnRefreshListener {
@@ -67,6 +65,7 @@ class MainActivity : AppCompatActivity() {
                     showMessage(this@MainActivity, "Loading")
                     refreshLiveData.value = true
                 }
+
                 is APIResponses.Success -> {
                     refreshLiveData.value = false
                     if (it.data!!.isNotEmpty()) {
@@ -84,10 +83,10 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         binding.apply {
             recyclerList.adapter = adapter
-            recyclerList.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            recyclerList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
-                    if(!recyclerView.canScrollVertically(1))
+                    if (!recyclerView.canScrollVertically(1))
                         viewModel.loadArticles()
                 }
             })
