@@ -1,5 +1,7 @@
 package com.vinayakgardi.newshub_newsapplication.Model
 
+import java.io.Serializable
+
 data class ArticleModel(
     val id : Int,
     val title: String,
@@ -11,5 +13,6 @@ data class ArticleModel(
     val readingTime : String,
     val articleUrl : String,
     val image : String,
-    val category: Int
-)
+    val category: Int,
+    val authorUrl : String
+) : Serializable

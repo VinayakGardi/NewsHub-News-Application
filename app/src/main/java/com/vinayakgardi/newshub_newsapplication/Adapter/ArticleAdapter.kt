@@ -1,10 +1,12 @@
 package com.vinayakgardi.newshub_newsapplication.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.vinayakgardi.newshub_newsapplication.Activities.ArticleActivity
 import com.vinayakgardi.newshub_newsapplication.Model.ArticleModel
 import com.vinayakgardi.newshub_newsapplication.Utilites.imageWithGlide
 import com.vinayakgardi.newshub_newsapplication.databinding.ItemCardNewsBinding
@@ -17,6 +19,16 @@ class ArticleAdapter(var list : ArrayList<ArticleModel>, val context: Context ):
               newsTitle.text = Html.fromHtml(model.title)
               newsExcerpt.text = Html.fromHtml(model.excerpt)
               imageWithGlide(model.image,newsImage,context)
+
+              itemNewsCard.setOnClickListener {
+                   val intent = Intent().apply {
+                       putExtra("model",model)
+                       setClass(context,ArticleActivity::class.java)
+                   }
+                  context.startActivity(intent)
+
+              }
+
           }
       }
     }

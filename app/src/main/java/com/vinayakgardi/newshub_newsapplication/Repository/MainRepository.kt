@@ -45,6 +45,7 @@ class MainRepository(private val context: Context) {
                             .getJSONObject("full").getString("source_url")
 
                         val category = getJSONArray("categories").get(0).toString().toInt()
+                        val authorUrl = authorArray.getJSONObject(0).getString("link")
 
                         val model = ArticleModel(
                             id,
@@ -57,7 +58,8 @@ class MainRepository(private val context: Context) {
                             readingTime,
                             articleUrl,
                             image,
-                            category
+                            category,
+                            authorUrl
                         )
 
                         tempList.add(model)

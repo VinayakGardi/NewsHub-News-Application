@@ -27,7 +27,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_gradient_trans"
@@ -47,7 +47,7 @@
                 android:layout_marginBottom="24dp"
                 android:text="Title"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_24sdp"
+                android:textSize="@dimen/_22sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/detailed_image"
                 app:layout_constraintStart_toStartOf="parent"
 
@@ -83,12 +83,13 @@
             <TextView
                 android:id="@+id/detailed_author_name"
                 style="@style/news_list_description"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
+
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="20dp"
                 android:text="Author Name"
-                android:textSize="@dimen/_15sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -100,25 +101,25 @@
                 android:layout_height="wrap_content"
                 android:text="dd-mm-yyyy"
                 android:textColor="@color/grey"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="@+id/detailed_author_name"
                 app:layout_constraintTop_toBottomOf="@+id/detailed_author_name" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/detailed_twitter"
+                android:id="@+id/detailed_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/dark_Color_Primary"
                 android:text="More"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:icon="@drawable/twitter"
-                app:iconSize="@dimen/_25sdp"
-                android:layout_margin="20dp"
+                app:iconSize="@dimen/_20sdp"
                 app:iconTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -130,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Description"
-            android:textSize="@dimen/_16sdp" />
+            android:textSize="@dimen/_14sdp" />
 
 
 
