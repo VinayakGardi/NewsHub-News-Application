@@ -1,6 +1,8 @@
 package com.vinayakgardi.newshub_newsapplication.Activities
 
+import android.opengl.Visibility
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
@@ -79,13 +81,38 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun loadRefreshArticles() {
+        updateShimmerLayout(false)
         refreshLiveData.observe(this@MainActivity) {
             binding.swiperefresh.isRefreshing = it
+            updateShimmerLayout(it)
         }
         binding.swiperefresh.setOnRefreshListener {
             viewModel.currentPage = 0
             viewModel.loadArticles()
         }
+
+    }
+
+    @Suppress("UNREACHABLE_CODE")
+    private fun updateShimmerLayout(isLoaded: Boolean?) {
+        binding.apply {
+            if(!isLoaded!!){
+                cardShimmerHolder.visibility = View.GONE
+                listShimmerHolder.visibility = View.GONE
+                return
+            }
+            if(layoutCurrent == LAYOUT_CARD){
+                cardShimmerHolder.visibility = View.VISIBLE
+                listShimmerHolder.visibility = View.GONE
+
+            }
+            else{
+                cardShimmerHolder.visibility = View.GONE
+                listShimmerHolder.visibility = View.VISIBLE
+            }
+        }
+
+
 
     }
 

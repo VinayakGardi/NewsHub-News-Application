@@ -32,6 +32,7 @@ class ArticleAdapter(var list : ArrayList<ArticleModel>, val context: Context ):
 
                 }
 
+
             }
         }
     }
@@ -65,8 +66,12 @@ class ArticleAdapter(var list : ArrayList<ArticleModel>, val context: Context ):
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model  = list[position]
         if(getItemViewType(position) == LAYOUT_CARD){
+//            list.removeAt(list.size - 1)
+//            list.reverse()
             (holder as cardviewHolder).bind(model,context)
         }else{
+//            list.removeAt(list.size-1)
+//            list.reverse()
             (holder as listViewHolder).bind(model,context)
         }
 
