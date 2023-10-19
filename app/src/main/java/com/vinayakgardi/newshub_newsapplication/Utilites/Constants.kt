@@ -1,4 +1,4 @@
-package com.devatrii.dailynews.utils
+package com.vinayakgardi.newshub_newsapplication.Utilites
 
 const val POST_PER_PAGE = 7 // More posts more loading time
 const val WEBSITE_URL = "https://globalnews.ca/"

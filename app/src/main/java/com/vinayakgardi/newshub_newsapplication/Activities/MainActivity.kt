@@ -6,9 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.vinayakgardi.newshub_newsapplication.Adapter.ArticleAdapter
+import com.vinayakgardi.newshub_newsapplication.Adapter.LAYOUT_CARD
+import com.vinayakgardi.newshub_newsapplication.Adapter.LAYOUT_LIST
 import com.vinayakgardi.newshub_newsapplication.Model.ArticleModel
+import com.vinayakgardi.newshub_newsapplication.R
 import com.vinayakgardi.newshub_newsapplication.Repository.APIResponses
 import com.vinayakgardi.newshub_newsapplication.Repository.MainRepository
+import com.vinayakgardi.newshub_newsapplication.Utilites.PrefUtils
 import com.vinayakgardi.newshub_newsapplication.Utilites.showMessage
 import com.vinayakgardi.newshub_newsapplication.ViewModel.MainViewModel
 import com.vinayakgardi.newshub_newsapplication.ViewModel.MainViewModelFactory
@@ -20,21 +24,59 @@ class MainActivity : AppCompatActivity() {
     val list: ArrayList<ArticleModel> = ArrayList()
     val adapter = ArticleAdapter(list, this)
     private val refreshLiveData = MutableLiveData<Boolean>()
-
-    lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MainViewModel
+    var layoutCurrent = LAYOUT_LIST
     override fun onCreate(savedInstanceState: Bundle?) {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        PrefUtils.init(this@MainActivity)
 
         binding.apply {
             setupRecyclerView()
             loadArticlesFromAPI()
             loadRefreshArticles()
+            changeRecyclerView()
         }
 
     }
+
+    private fun changeRecyclerView() {
+        layoutCurrent = PrefUtils.getPrefInt("layout_type", LAYOUT_LIST)
+        binding.mainActionBar.layoutChange.setOnClickListener {
+            if(layoutCurrent == LAYOUT_LIST){
+                layoutCurrent = LAYOUT_CARD
+            }
+            else{
+                layoutCurrent = LAYOUT_LIST
+            }
+            updateUI()
+        }
+    }
+
+    private fun updateUI() {
+        PrefUtils.putPrefInt("layout_type",layoutCurrent)
+        if(layoutCurrent == LAYOUT_CARD){
+            binding.mainActionBar.layoutChange.setImageResource(R.drawable.layout_card)
+        }
+        else{
+            binding.mainActionBar.layoutChange.setImageResource(R.drawable.layout_list)
+        }
+        val tempList : ArrayList<ArticleModel> = ArrayList()
+        if(list.isNotEmpty()){
+            list.forEach {
+                tempList.add(it)
+            }
+            list.clear()
+            tempList.forEach {
+                it.LAYOUT_TYPE =layoutCurrent
+                list.add(it)
+            }
+            adapter.notifyDataSetChanged()
+        }
+    }
+
 
     private fun loadRefreshArticles() {
         refreshLiveData.observe(this@MainActivity) {

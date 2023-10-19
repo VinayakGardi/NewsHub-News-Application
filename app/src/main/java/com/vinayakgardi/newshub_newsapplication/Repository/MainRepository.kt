@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.devatrii.dailynews.utils.POSTS_URL
 import com.vinayakgardi.newshub_newsapplication.Model.ArticleModel
+import com.vinayakgardi.newshub_newsapplication.Utilites.POSTS_URL
 import org.json.JSONArray
 
 class MainRepository(private val context: Context) {

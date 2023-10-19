@@ -8,18 +8,18 @@ import android.text.Html
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
-import com.devatrii.dailynews.utils.HTMLImageGetter
 import com.vinayakgardi.newshub_newsapplication.Model.ArticleModel
+import com.vinayakgardi.newshub_newsapplication.Utilites.HTMLImageGetter
 import com.vinayakgardi.newshub_newsapplication.Utilites.convertDateFormat
 import com.vinayakgardi.newshub_newsapplication.Utilites.imageWithGlide
 import com.vinayakgardi.newshub_newsapplication.databinding.ActivityArticleBinding
 import com.zzhoujay.richtext.RichText
-import java.lang.Exception
 
 
 class ArticleActivity : AppCompatActivity() {
 
-    lateinit var binding : ActivityArticleBinding
+    lateinit var binding: ActivityArticleBinding
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityArticleBinding.inflate(layoutInflater)
@@ -28,8 +28,8 @@ class ArticleActivity : AppCompatActivity() {
 
         binding.apply {
             val model = intent.getSerializableExtra("model") as ArticleModel
-            imageWithGlide(model.image,detailedImage,this@ArticleActivity)
-            imageWithGlide(model.authorPic,detailedAuthorImage,this@ArticleActivity)
+            imageWithGlide(model.image, detailedImage, this@ArticleActivity)
+            imageWithGlide(model.authorPic, detailedAuthorImage, this@ArticleActivity)
             detailedAuthorName.text = model.authorName
             detailedArticleDate.text = convertDateFormat(model.date)
             detailedTitle.text = Html.fromHtml(model.title)
@@ -42,20 +42,20 @@ class ArticleActivity : AppCompatActivity() {
                 )
                 startActivity(urlIntent)
             }
-            val richText = RichText.fromHtml(model.content).imageGetter(HTMLImageGetter(resources,detailedDescription,this@ArticleActivity))
+            val richText = RichText.fromHtml(model.content)
+                .imageGetter(HTMLImageGetter(resources, detailedDescription, this@ArticleActivity))
             richText.autoFix(true)
-            richText.urlClick{
-               try{
-                   val intent = CustomTabsIntent.Builder().build()
-                   intent.launchUrl(this@ArticleActivity, Uri.parse(it))
-               }
-               catch (e : Exception){
-                   e.printStackTrace()
-               }
+            richText.urlClick {
+                try {
+                    val intent = CustomTabsIntent.Builder().build()
+                    intent.launchUrl(this@ArticleActivity, Uri.parse(it))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
 
                 true
             }
-           richText.into(detailedDescription)
+            richText.into(detailedDescription)
 
         }
     }

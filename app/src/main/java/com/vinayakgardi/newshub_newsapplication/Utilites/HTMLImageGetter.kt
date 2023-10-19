@@ -1,4 +1,4 @@
-package com.devatrii.dailynews.utils
+package com.vinayakgardi.newshub_newsapplication.Utilites
 
 import android.content.Context
 import android.content.res.Resources
