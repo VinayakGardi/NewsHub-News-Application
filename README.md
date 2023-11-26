@@ -2,7 +2,27 @@
 # NewsHub-News-Application
 The NewsHub Android Application keeps you in the know with the latest news. Get access to real-time updates from the Global News website via a REST API, offering a seamless way to stay informed
 
+## Run the application 
 
+### Points to remember : 
+
+- Android studio should be installed in the system  (prefer latest  version )
+- Git should be installed in the system
+
+
+
+
+
+```bash
+  mkdir NewsHub - newsApplication
+
+  cd NewsHub
+
+  git clone https://github.com/VinayakGardi/NewsHub-News-Application.git
+
+```
+- Run android studio 
+- run the project in emulator or any physical device
 ## Features
 - Display the news in the UI fetched from the API.
 - Can display data in 2 different formats.
